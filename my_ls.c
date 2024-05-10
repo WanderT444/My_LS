@@ -67,6 +67,35 @@ void listFiles_with_args(const char * dirname){
     struct dirent * data;
     
     data = readdir(mainDir);
-    
+    while (data != NULL){
+        
+        // for printing the files
+        if ( data->d_type == DT_REG){
+         printf("\n     File :  %s\n",data->d_name);
+            
+        }
 
-}
+       // for prinintg the directory name and ignoring . and ..
+          if (data->d_type == DT_DIR && strcmp(data->d_name, ".") != 0 && strcmp(data->d_name, "..") != 0 ){      // System labels direcotries as DT_DIR
+              
+              printf("\nDirectory  :  %s\n",data->d_name);
+              printf("%s","\n");
+                                                                                 
+              // chunk of code is for recursvily opening directories with in directory
+               char path[100] = {0};
+               strcat(path,dirname);               // add the origional path . to path
+               strcat(path,"/");                  // add slash to the to path
+               strcat(path,data->d_name);        // now add the directory name to the path so path = ./dir_name
+              
+              
+              // for recursion so when the program loops back around path will be the next directory to be opened inside the origional directory
+              // this process will loop untill there are no more files or directories nested in the original directory.
+               listFiles_with_args(path);
+           
+
+             }//end if
+        
+        
+             data = readdir(mainDir);
+
+}  // end listFiles_with_args
