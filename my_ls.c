@@ -22,6 +22,8 @@ getcwd(cwd, sizeof(cwd));
         perror("Fatal Error");
         exit(1);
     }
+    
+    prinft("%s",cwd);
 
    if (argc > 2) {
     printf("%s"," Error too many arguements My_LS can only handle 1 argument at a time\n");
