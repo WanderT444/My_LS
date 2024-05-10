@@ -1,2 +1,2 @@
 # My_LS
-Recreation of the Linux LS Command
+Trimmed down Implementation of the Linux LS Command
