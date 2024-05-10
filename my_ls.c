@@ -9,7 +9,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-
+void listFiles_with_args(const char * dirname);
+void listFiles_no_args(const char * dirname);
 
 int main(int argc, const char * argv[]) {
 
@@ -30,4 +31,42 @@ getcwd(cwd, sizeof(cwd));
     return(1);
    }
 
+   if (argv[1] == NULL){
+        
+        listFiles_no_args(".");
+        
+    } // end if input == null
+    
+    // here the program will print everything out in the selected directory with recursion
+    else {
+        listFiles_with_args(argv[1]);
+    } // end else
+
 } // end main 
+
+
+// first we have to use open dir to access the directories
+
+
+ // start with Directory
+    
+
+void listFiles_with_args(const char * dirname){
+    
+    
+    DIR * mainDir;
+
+    mainDir = opendir(dirname);                            // instruction to open all directories and files
+    if ( mainDir == NULL){
+       printf("%s -- %s\n","My_LS: cannot open directory ",dirname );
+       return;
+    }
+
+     //create readdir to read data from open dir
+
+    struct dirent * data;
+    
+    data = readdir(mainDir);
+    
+
+}
